@@ -2,6 +2,8 @@ package edu.chapman.cpsc356.tipcalculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         this.button8 = (Button) findViewById(R.id.btn8);
         this.button9 = (Button) findViewById(R.id.btn9);
         this.button10 = (Button) findViewById(R.id.btn10);
+
 
         //Button 1 onClickListener Method
         button1.setOnClickListener(new View.OnClickListener() {
@@ -211,48 +214,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-    buttonClick Method
-    Input: Button
-    Output: void method, determines which tip rate to calculate based on the button that is pressed
-    Errors: Handles error of invalid price typed into priceEditText
-    */
-    public void buttonClick(View view)
-    {
-        if (isValidPrice())
-        {
-            int buttonNum = Integer.parseInt(((Button)view).getText().toString());
-            if (buttonNum >= 1 && buttonNum <= 3)
-            {
-                writeMessage(Double.parseDouble(priceEditText.getText().toString()), LOWTIP);
-            }
-            else if (buttonNum == 4 || buttonNum == 5)
-            {
-                writeMessage(Double.parseDouble(priceEditText.getText().toString()), MEDLOWTIP);
-            }
-            else if (buttonNum == 6 || buttonNum == 7)
-            {
-                writeMessage(Double.parseDouble(priceEditText.getText().toString()), MEDTIP);
-            }
-            else if (buttonNum == 8 || buttonNum == 9)
-            {
-                writeMessage(Double.parseDouble(priceEditText.getText().toString()), MEDHIGHTIP);
-            }
-            else
-            {
-                writeMessage(Double.parseDouble(priceEditText.getText().toString()), HIGHTIP);
-            }
-        }
-        else
-        {
-            writeError();
-        }
-    }
-
-    /*
     calcTip Method
     Input: Positive price as a double, percent between 0 and 1 as a double
     Output: Price times percent
-    Error Handling: Method does not account for invalid prices or percentages
+    Error Handling: Method does not account for invalid prices or percentages; only used internally
     */
     protected double calcTip(double price, double percent) { return (price*percent); }
 
@@ -262,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     Output: If price is 0, tipTextView.text is set to "Looks like you paid nothing,
             so no need to tip!"
             If price is less than 0.1, tipTextView.text is set to "The price you paid
-            is too small to calculate a tip for"
+            is too small to calculate a tip for."
             If price is 0.1 or greater, percentTextView.text is set to the percent value times 100,
             tipTextView.text is set to the tip amount, and totalTextView.text is set to the total
     */
@@ -328,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
     /*
     writeError Method
     Input: None
-    Output: Void method; Sets percentTextView and totalTextView visibilities to GONE, and changes
+    Output: Void; Sets percentTextView and totalTextView visibilities to GONE, and changes
             tipTextView.text to "The price you have entered is invalid"
     */
     protected void writeError()
