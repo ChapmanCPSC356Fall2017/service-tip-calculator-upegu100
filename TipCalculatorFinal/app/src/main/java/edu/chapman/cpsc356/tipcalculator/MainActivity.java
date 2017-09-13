@@ -13,12 +13,15 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TextViews
     private TextView priceTextView;
     private TextView ratingTextView;
     private TextView percentTextView;
     private TextView tipTextView;
     private TextView totalTextView;
+    //EditTexts
     private EditText priceEditText;
+    //Buttons
     private Button button1;
     private Button button2;
     private Button button3;
@@ -29,11 +32,13 @@ public class MainActivity extends AppCompatActivity {
     private Button button8;
     private Button button9;
     private Button button10;
+    //Static Tip Variables
     private static double LOWTIP = 0.1;
     private static double MEDLOWTIP = 0.13;
     private static double MEDTIP = 0.15;
     private static double MEDHIGHTIP = 0.2;
     private static double HIGHTIP = 0.25;
+    //Formatting
     private DecimalFormat moneyFormat = new DecimalFormat("0.00");
 
     @Override
@@ -217,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
     calcTip Method
     Input: Positive price as a double, percent between 0 and 1 as a double
     Output: Price times percent
-    Error Handling: Method does not account for invalid prices or percentages; only used internally
     */
     protected double calcTip(double price, double percent) { return (price*percent); }
 
